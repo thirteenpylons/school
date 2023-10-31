@@ -35,3 +35,10 @@ n is different than N.
 
 def count_char_in_str(character: str, target: str) -> int:
     return target.count(character)
+    
+    
+if __name__ == "__main__":
+    input_data = input().split(' ', 1)
+    user_defined_character = input_data[0]
+    user_defined_target = input_data[1]
+    print(count_char_in_str(user_defined_character, user_defined_target))

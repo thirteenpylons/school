@@ -43,8 +43,15 @@ def format_name(full_name: str) -> str:
         first_name, last_name = names
         return f"{last_name}, {first_name[0]}."
     else:
-        return "Invalid input format"
+        raise ValueError("Invalid input format")
 
 
 def main():
-    pass
+    full_name = input()
+    try:
+        print(format_name(full_name))
+    except ValueError as e:
+        print(e)
+
+if __name__ == "__main__":
+    main()
