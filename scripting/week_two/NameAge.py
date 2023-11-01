@@ -14,7 +14,7 @@ def main():
     user_name = input("What is your name?\n")
     user_age = int(input("What is your age?\n"))
     
-    print(f"Hello {user_name}! You were born in {datetime.now().year - user_age}")
+    print(f"Hello {user_name}! You were born in {datetime.now().year - user_age}.")
 
 
 if __name__ == "__main__":

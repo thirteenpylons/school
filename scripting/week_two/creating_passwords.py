@@ -51,11 +51,23 @@ Number of characters in 6yellow6: 8
 """
 
 
-def generate_password(first_word: str, second_word: str, this_integer: int) -> str:
-    return f"First password: {second_word}_{first_word}\nSecond password: {this_integer}{first_word}{this_integer}"
+def generate_password(first_word: str, second_word: str, this_integer: int) -> tuple:
+    first_password = f"{first_word}_{second_word}"
+    second_password = f"{this_integer}{first_word}{this_integer}"
+    return first_password, second_password
 
 def main():
-    first_word = input()
-    second_word = input()
-    this_integer = int(input())
-    print(f"You entered: {first_word} {second_word} {this_integer}")
+    first_word: str = input()
+    second_word: str = input()
+    this_integer: int = int(input())
+    print(f"\nYou entered: {first_word} {second_word} {this_integer}\n")
+
+    first_password, second_password = generate_password(first_word, second_word, this_integer)
+    
+    print(f"First password: {first_password}")
+    print(f"Second password: {second_password}\n")
+    print(f"Number of characters in {first_password}: {len(first_password)}")
+    print(f"Number of characters in {second_password}: {len(second_password)}")
+
+if __name__ == "__main__":
+    main()
