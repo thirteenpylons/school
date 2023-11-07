@@ -13,12 +13,15 @@ the output is:
 
 
 def main():
-    these_integers: str = input("Enter three integers seperated with spaces:\n")
-    split_integers: list[int] = [int(x) for x in these_integers.split()]
+    split_integers: list[int] = []
+
+    for _ in range(3):
+        integer: int = int(input())
+        split_integers.append(integer)
+
     smallest_integer: int = min(split_integers)
     
     print(smallest_integer)
-
 
 if __name__ == "__main__":
     main()

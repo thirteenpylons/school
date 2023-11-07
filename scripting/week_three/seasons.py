@@ -31,42 +31,35 @@ def determine_season(month: str, day: int) -> str:
     """
     Determine the season based on month and day.
     """
-    # Define a dictionary with month as key and (start day, end day, season) as values
+    if month not in {'January', 'February', 'March', 'April', 'May', 'June', 
+                     'July', 'August', 'September', 'October', 'November', 'December'}:
+        return 'Invalid'
+        
+    if day not in range(1, 32):  # No month has more than 31 days, so this is a simple check
+        return 'Invalid'
+    
+    # Define the seasons with date ranges
     seasons = {
-        'January': (1, 31, 'Winter'),
-        'February': (1, 29, 'Winter'),  # 29 to account for leap years, but additional check needed
-        'March': (1, 19, 'Winter'),
-        'March': (20, 31, 'Spring'),
-        'April': (1, 30, 'Spring'),
-        'May': (1, 31, 'Spring'),
-        'June': (1, 20, 'Spring'),
-        'June': (21, 30, 'Summer'),
-        'July': (1, 31, 'Summer'),
-        'August': (1, 31, 'Summer'),
-        'September': (1, 21, 'Summer'),
-        'September': (22, 30, 'Autumn'),
-        'October': (1, 31, 'Autumn'),
-        'November': (1, 30, 'Autumn'),
-        'December': (1, 20, 'Autumn'),
-        'December': (21, 31, 'Winter')
+        'Spring': [('March', 20, 31), ('April', 1, 30), ('May', 1, 31), ('June', 1, 20)],
+        'Summer': [('June', 21, 30), ('July', 1, 31), ('August', 1, 31), ('September', 1, 21)],
+        'Autumn': [('September', 22, 30), ('October', 1, 31), ('November', 1, 30), ('December', 1, 20)],
+        'Winter': [('December', 21, 31), ('January', 1, 31), ('February', 1, 29), ('March', 1, 19)]
     }
     
-    # Check for February in leap years
-    if month == 'February' and day == 29:
-        if not (year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)):
-            return 'Invalid'
-
-    # Check if month is valid
-    if month in seasons:
-        start_day, end_day, season = seasons[month]
-        if start_day <= day <= end_day:
-            return season
-
+    # Check for February in non-leap years
+    if month == 'February' and day > 28:
+        return 'Invalid'
+    
+    for season, ranges in seasons.items():
+        for start_month, start_day, end_day in ranges:
+            if month == start_month and start_day <= day <= end_day:
+                return season
+    
     return 'Invalid'
 
 def main():
-    month = input()
-    day = int(input())
+    month = input("Enter the month: ")
+    day = int(input("Enter the day: "))
 
     print(determine_season(month, day))
 
