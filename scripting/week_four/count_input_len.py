@@ -11,9 +11,12 @@ Note: Account for all characters that aren't spaces, periods, or commas (Ex: "r"
 
 """
 
-def main():
-    user_text = input()
+
+def count_chars(text: str) -> int:
+    return sum(1 for char in text if char not in [' ', '.', ','])
 
 
 if __name__ == "__main__":
-    main()
+    this_string = input()
+    result = count_chars(this_string)
+    print(result)
