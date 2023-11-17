@@ -20,10 +20,27 @@ Store and build the stronger password in the given password variable.
 """
 
 
-def main():
-    pass
+convert = {
+    "i": "!",
+    "a": "@",
+    "m": "M",
+    "B": "8",
+    "o": "."
+}
 
+def strengthen_password(password: str) -> str:
+    letters_in_password = []
+    
+    for letter in password:
+        if letter in convert:
+            letters_in_password.append(convert[letter])
+        else:
+            letters_in_password.append(letter)
+    
+    strengthened_password = ''.join(letters_in_password) + "q*s"
+    return print(strengthened_password)
 
 if __name__ == "__main__":
-    main()
+    word = input()
+    strengthen_password(word)
     
