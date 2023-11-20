@@ -19,9 +19,20 @@ Eating 2 shoes a day keeps the doctor away.
 """
 
 
-def main():
-    pass
+def main() -> None:
+    while True:
+        input_str = input()
+        parts = input_str.split()
+        noun: str = parts[0]
+        number: str = parts[1]
 
+        if noun == 'quit':
+            break
+
+        if int(number) > 1 and not noun.endswith('s'):
+            noun += 's'
+
+        print(f"Eating {number} {noun} a day keeps the doctor away.")
 
 if __name__ == "__main__":
     main()
