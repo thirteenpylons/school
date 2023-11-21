@@ -35,12 +35,17 @@ class Game:
         self.game_running = True
 
     def show_surrounding_rooms(self):
-        pass
+        print(f"\nYou are currently in the {self.current_room}.")
+        print("Surrounding rooms:")
+        for direction, room in self.rooms[self.current_room].items():
+            if direction in ['North', 'South', 'East', 'West']:  # Filter out non-direction keys
+                print(f"\t{direction}: {room}")
 
     def show_instructions(self):
         print("\nCubicle Quest: The Great Paper Chase")
         print("\tCollect ink and paper and load the printer, reboot the router and print your reports.")
         print("\tGrab the sandwich from the Lunch room to dodge the boss the first time.")
+        print("\nTo see surrounding rooms: show surroundings")
         print("\nMove commands: move north, move east, move south, move west")
         print("\nAdd to Inventory: get 'item name'")
         print("\nSpecial commands: reboot router, load printer, print reports\n")
@@ -144,6 +149,8 @@ class Game:
                 self.show_inventory()
             elif action == 'show' and item == 'instructions':
                 self.show_instructions()
+            elif action == 'show' and item == 'surroundings':
+                self.show_surrounding_rooms()
             elif action == 'get':
                 self.get_item(item)
             elif action == 'reboot' and item == 'router':
