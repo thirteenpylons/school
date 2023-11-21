@@ -45,8 +45,8 @@ class Game:
         print("\nCubicle Quest: The Great Paper Chase")
         print("\tCollect ink and paper and load the printer, reboot the router and print your reports.")
         print("\tGrab the sandwich from the Lunch room to dodge the boss the first time.")
-        print("\nTo see surrounding rooms: show surroundings")
-        print("\nMove commands: move north, move east, move south, move west")
+        print("\nTo see surrounding rooms: look around")
+        print("\nMove commands: go north, go east, go south, go west")
         print("\nAdd to Inventory: get 'item name'")
         print("\nSpecial commands: reboot router, load printer, print reports\n")
 
@@ -144,13 +144,13 @@ class Game:
 
             action, item = command[0], command[1]
 
-            if action == 'move':
+            if action == 'go':
                 self.move(item.capitalize())
             elif action == 'show' and item == 'inventory':
                 self.show_inventory()
             elif action == 'show' and item == 'instructions':
                 self.show_instructions()
-            elif action == 'show' and item == 'surroundings':
+            elif action == 'look' and item == 'around':
                 self.show_surrounding_rooms()
             elif action == 'get':
                 self.get_item(item)
