@@ -17,7 +17,7 @@ init(autoreset=True)
 
 class Game:
     def __init__(self):
-        self.rooms = {
+        self.rooms: dict = {
             'Lobby': {'North': 'Steves office', 'East': 'Lunch room', 'South': 'Restrooms', 'West': 'Players office', 'item': None},
             'Players office': {'North': 'Conference room', 'East': 'Lobby', 'item': 'laptop'},
             'Conference room': {'East': 'Steves office', 'South': 'Players office', 'item': 'printer'},
@@ -28,20 +28,20 @@ class Game:
             'Restrooms': {'North': 'Lobby', 'South': 'Storage', 'item': None},
             'Storage': {'North': 'Restrooms', 'item': 'ink'},
         }
-        self.current_room = 'Lobby'
-        self.inventory = {'ink': False, 'paper': False, 'sandwich': False, 'router_rebooted': False, 'printer_loaded': False}
-        self.villain = 'Boss'
-        self.villain_encountered = False
-        self.game_running = True
+        self.current_room: str = 'Lobby'
+        self.inventory: dict = {'ink': False, 'paper': False, 'sandwich': False, 'router_rebooted': False, 'printer_loaded': False}
+        self.villain: str = 'Boss'
+        self.villain_encountered: bool = False
+        self.game_running: bool = True
 
-    def show_surrounding_rooms(self):
+    def show_surrounding_rooms(self) -> None:
         print(f"\nYou are currently in the {self.current_room}.")
         print("Surrounding rooms:")
         for direction, room in self.rooms[self.current_room].items():
             if direction in ['North', 'South', 'East', 'West']:  # Filter out non-direction keys
                 print(f"\t{direction}: {room}")
 
-    def show_instructions(self):
+    def show_instructions(self) -> None:
         print("\nCubicle Quest: The Great Paper Chase")
         print("\tCollect ink and paper and load the printer, reboot the router and print your reports.")
         print("\tGrab the sandwich from the Lunch room to dodge the boss the first time.")
@@ -50,14 +50,14 @@ class Game:
         print("\nAdd to Inventory: get 'item name'")
         print("\nSpecial commands: reboot router, load printer, print reports\n")
 
-    def show_inventory(self):
-        current_inventory = [item for item in self.inventory.keys() if self.inventory[item] is True]
-        if len(current_inventory) == 0:
-            print(Fore.CYAN + "Your inventory is empty.")
+    def show_inventory(self) -> None:
+        current_inventory = [item for item, has in self.inventory.items() if has]
+        if not current_inventory:
+            print(COLORS["inventory"] + "Your inventory is empty.")
         else:
-            print(current_inventory)
-
-    def move(self, direction):
+            print(f"Inventory: {', '.join(current_inventory)}")
+    
+    def move(self, direction: str) -> None:
         """
         Move direction if possible and MOVE THE BOSS
         If item is in room, tell player about the item.
@@ -72,7 +72,7 @@ class Game:
         else:
             print("You can't go that way.")
 
-    def move_villain(self):
+    def move_villain(self) -> None:
         # Get the list of possible rooms to which the villain can move
         possible_rooms = list(self.rooms.keys())
         # Remove the current room of the villain to avoid staying in place
@@ -82,7 +82,7 @@ class Game:
         self.villain = new_room
         print(Fore.RED + f"The boss is now in the {self.villain}.")
 
-    def get_item(self, item):
+    def get_item(self, item: str) -> None:
         if item in ['sandwich', 'ink', 'paper'] and self.rooms[self.current_room].get('item') == item:
             self.inventory[item] = True
             self.rooms[self.current_room]['item'] = None
@@ -90,28 +90,28 @@ class Game:
         else:
             print(Fore.MAGENTA + "There is nothing to pick up here.")
 
-    def reboot_router(self):
+    def reboot_router(self) -> None:
         if self.current_room == 'MDF':
             self.inventory['router_rebooted'] = True
             print(Fore.GREEN + "You rebooted the router.")
         else:
             print(Fore.MAGENTA + "There's no router here to reboot.")
 
-    def load_printer(self):
+    def load_printer(self) -> None:
         if self.current_room == 'Conference room' and self.inventory['ink'] and self.inventory['paper']:
             self.inventory['printer_loaded'] = True
             print(Fore.GREEN + "You loaded the printer with ink and paper.")
         else:
             print("You need ink and paper to load the printer.")
 
-    def eat_sandwich(self):
+    def eat_sandwich(self) -> None:
         if self.inventory['sandwich']:
             self.inventory['sandwich'] = False
             print("You ate the sandwich. Yum!")
         else:
             print("You have no sandwich to eat.")
 
-    def print_reports(self):
+    def print_reports(self) -> None:
         if self.current_room == 'Players office' and self.inventory['printer_loaded'] and self.inventory['router_rebooted']:
             print(Fore.GREEN + "You have printed the reports.")
             print(Fore.CYAN + "Congratulations, You win the game!")
@@ -122,7 +122,8 @@ class Game:
             if not self.inventory['printer_loaded']:
                 print(Fore.MAGENTA + "You need to load the printer with ink and paper!")
 
-    def start_game(self):
+    def start_game(self) -> None:
+        self.show_instructions()
         print("You need to print your reports that are due to your boss before he catches you.")
         print(Fore.YELLOW + f"You are currently in the {self.current_room}")
         self.villain = random.choice([room for room in self.rooms if room != self.current_room and room != 'item'])
@@ -176,5 +177,6 @@ class Game:
         print(Fore.GREEN + "Thanks for playing!")
 
 # Create a game instance and start the game
-office_game = Game()
-office_game.start_game()
+if __name__ == "__main__":
+    office_game = Game()
+    office_game.start_game()
