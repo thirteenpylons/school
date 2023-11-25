@@ -15,6 +15,17 @@ from colorama import init, Fore
 
 init(autoreset=True)
 
+COLORS = {
+    "move": Fore.LIGHTGREEN_EX,
+    "item": Fore.LIGHTYELLOW_EX,
+    "villain": Fore.RED,
+    "inventory": Fore.CYAN,
+    "action": Fore.GREEN,
+    "warning": Fore.MAGENTA,
+    "win": Fore.CYAN,
+    "lose": Fore.LIGHTRED_EX
+}
+
 class Game:
     def __init__(self):
         self.rooms: dict = {
