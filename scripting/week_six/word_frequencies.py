@@ -15,15 +15,22 @@ mark 1
 """
 
 
-def count_words(sentence: str) -> list:
-    word_count = [f"{word} {sentence.count(word)}" for word in sentence.split()]
-    return word_count
+def count_words(words: list) -> list:
+    word_count_dict = {}
+
+    for word in words:
+        if word in word_count_dict:
+            word_count_dict[word] += 1
+        else:
+            word_count_dict[word] = 1
+
+    word_count_list = [f"{word} {word_count_dict[word]}" for word in words]
+    return word_count_list
 
 def main():
-    sentence_to_count = input()
-    result = count_words(sentence_to_count)
+    words = input().split()
+    result = count_words(words)
     print("\n".join(result))
-
 
 if __name__ == "__main__":
     main()

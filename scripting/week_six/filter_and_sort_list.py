@@ -15,13 +15,13 @@ For coding simplicity, follow every output value by a space. Do not end with new
 
 def return_positive_sorted(numbers: list) -> str:
     result = sorted([number for number in numbers if number >= 0])
-    return ' '.join(str(number) for number in result) + ' '
+    return ' '.join(str(number) for number in result)
     
 
 def main():
     numbers = list(map(int, input().split()))
     result = return_positive_sorted(numbers)
-    print(result)
+    print(result, end=' ')
 
 
 if __name__ == "__main__":
