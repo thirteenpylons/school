@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>This Form</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <main>
+      <form>
+        <div>
+            <label for=""name>Name</label>
+            <textarea
+                id="name"
+                name="name"
+                autofocus="on"
+                required
+                maxlength="15"
+            ></textarea>
+        </div>
+        <div>
+            <label for="email">Email</label>
+            <textarea
+                id="email"
+                name="email"
+                autofocus="on"
+                required
+                maxlength="30"
+            ></textarea>
+        </div>
+        <div>
+            <label for="message">Message</label>
+            <textarea
+                id="message"
+                name="message"
+                autofocus="on"
+                required
+                maxlength="250"
+            ></textarea>
+        </div>
+        <div>
+            <button type="submit">Submit</button>
+        </div>
+      </form>
+    </main>
+  </body>
+</html>
